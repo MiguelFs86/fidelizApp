@@ -16,7 +16,8 @@ RUN npm install -g @angular/cli@9.1.0
 # Copy project files into the docker image
 COPY . .
 
-RUN ng build --prod
+# RUN ng build --prod
+RUN node --max_old_space_size=1500 ./node_modules/@angular/cli/bin/ng build
 
 # STEP 2 build a small nginx image with static website
 
