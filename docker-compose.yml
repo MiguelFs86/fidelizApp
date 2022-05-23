@@ -28,8 +28,8 @@ services:
     environment:
       - ME_CONFIG_OPTIONS_EDITORTHEME="ambiance"
       - ME_CONFIG_MONGODB_SERVER=mongo
-      - ME_CONFIG_BASICAUTH_USERNAME=dxestion
-      - ME_CONFIG_BASICAUTH_PASSWORD=Dxestion0180
+      - ME_CONFIG_BASICAUTH_USERNAME=fidelizapp
+      - ME_CONFIG_BASICAUTH_PASSWORD=fidelizapp2022
     networks:
       - web
       - database
