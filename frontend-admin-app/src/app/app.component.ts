@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 	title = 'frontend-admin-app';
-	static BACKEND_URL = 'http://backend.fidelizapp.serantes.pro';
-	static SOCKET_URL = 'http://backend.fidelizapp.serantes.pro';
+	static BACKEND_URL = 'https://backend.fidelizapp.serantes.pro';
+	static SOCKET_URL = 'https://backend.fidelizapp.serantes.pro';
 	// static BACKEND_URL = 'http://localhost:3000';
 	// static SOCKET_URL = 'http://localhost:3000';
 }

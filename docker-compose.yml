@@ -2,11 +2,11 @@ version: "3"
 
 services:
   mongo:
-    image: bitnami/mongodb:3.6.13-r33
+    image: bitnami/mongodb:4.0.13-r11
     environment: 
-      - MONGODB_ROOT_PASSWORD=ab.cd1/1
+      - MONGODB_ROOT_PASSWORD=fidelizApp2022
       - MONGODB_USERNAME=fidelizApp1
-      - MONGODB_PASSWORD=fidelizApp1/1
+      - MONGODB_PASSWORD=fidelizApp2022
       - MONGODB_DATABASE=fidelizApp
     volumes:
       - $PWD/data/:/data/db
