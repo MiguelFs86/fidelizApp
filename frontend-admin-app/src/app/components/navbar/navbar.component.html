@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <div (click)="location.back()" *ngIf="router.url !== '/home' && auth.isAuthenticated()">
+            <i class="fa fa-arrow-alt-circle-left navbar-back-button"></i>
+        </div>
+        <!--
+		<span (click)="changeLanguage('es')" class="navbar-flag">
+			<img src="assets/es_flag.png">
+		</span>
+		<span (click)="changeLanguage('en')" class="navbar-flag">
+			<img src="assets/en_flag.png">
+		</span>
+		-->
+        <span><img src=""/></span>
+        <span class="example-fill-remaining-space"></span>
+        <span class="align-center"></span>
+        <span class="example-spacer"></span>
+        <button *ngIf="auth.isAuthenticated()" (click)="home()" mat-button>
+			{{ 'NAVBAR_PAGE.HOME' | translate }}
+		</button>
+        <button *ngIf="auth.isAuthenticated() && auth.isAdmin()" (click)="users()" mat-button>
+			{{ 'NAVBAR_PAGE.LIST_USERS' | translate }}
+		</button>
+        <button *ngIf="auth.isAuthenticated() && auth.isAdmin()" (click)="stores()" mat-button>
+			{{ 'NAVBAR_PAGE.LIST_STORES' | translate }}
+		</button>
+        <button *ngIf="auth.isAuthenticated()" (click)="logout()" mat-button>
+			{{ 'NAVBAR_PAGE.LOGOUT' | translate }}
+		</button>
+    </mat-toolbar-row>
+</mat-toolbar>

@@ -1,0 +1,204 @@
+<!-- <mat-tab-group (selectedTabChange)="getConnections($event)"> -->
+<mat-tab-group>
+    <mat-tab label="Datos del usuario" style="height: 100vh; padding:30px">
+        <mat-card class="register-card text-center">
+            <mat-card-header style="width: 100%">
+                <mat-card-title class="text-center">
+                    <h3>Detalle de usuario</h3>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row" *ngIf="user">
+                    <div class="col-sm-6">
+                        <form class="register-form">
+                            <table class=" table-register" style="width: 100%" *ngIf="user" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Usuario" [(ngModel)]="user.username" name="username" required>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Password" [(ngModel)]="user.password" type="password" name="password">
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Nombre" [(ngModel)]="user.name" name="name" required>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Email" [(ngModel)]="user.email" type="email" name="email" required>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Direccion" [(ngModel)]="user.address" name="address" required />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Twitter" [(ngModel)]="user.twitter" type="twitter" name="twitter" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Facebook" [(ngModel)]="user.facebook" type="facebook" name="facebook" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Instagram" [(ngModel)]="user.instagram" type="instagram" name="instagram" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Youtube" [(ngModel)]="user.youtube" type="youtube" name="youtube" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                        <br>
+                        <div *ngIf="auth.isAdmin()">
+                            <h4 class="text-center">Sincronización con Gmail</h4>
+                            <div class="register-full-width">
+                                <mat-checkbox name="gmailSync" [(ngModel)]="gmailSyncFlag">¿Enlazar con cuenta de Gmail?</mat-checkbox>
+                            </div>
+                            <button class="btn btn-primary" (click)="gmailSync(user._id)">Test/Start sync</button>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5">
+                        <h4 class="text-center">Logo</h4>
+                        <table style="width: 100%">
+                            <tbody>
+                                <tr style="height: 150px;">
+                                    <td style="border: 1px solid lightgray">
+                                        <img *ngIf="user.logo_img && !logo_imgURL" bind-src="user.logo_img ? (backendImgUrl + user.logo_img): noImage" style="height: 150px">
+
+                                        <input *ngIf="!user.logo_img" (change)="selectLogoImage($event); preview('logo', $event.target.files)" type="file" id="logo_file">
+                                        <img *ngIf="logo_imgURL" [src]="logo_imgURL" style="height: 150px">
+                                    </td>
+                                    <td>
+                                        <button (click)="removeLogoImage(0)" class="btn btn-danger" *ngIf="user.logo_img" style="margin-left: 20px; width: 40px; height: 150px;">X</button>
+                                        <button (click)="removeLogoImage(0)" class="btn btn-danger" *ngIf="!user.logo_img" style="margin-left: 20px; width: 40px; height: 150px;" disabled>X</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <!-- Email stuff -->
+                        <h4 *ngIf="auth.isAdmin()">Parámetros del email</h4>
+                        <form *ngIf="auth.isAdmin()" class="register-form">
+                            <table class=" table-register" style="width: 100%" *ngIf="user" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Servidor SMTP" [(ngModel)]="user.emailConfig.smtp" name="smtp" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Cuenta de correo" [(ngModel)]="user.emailConfig.emailAccount" type="email" name="emailAccount" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Puerto" [(ngModel)]="user.emailConfig.port" name="port" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Contraseña email" [(ngModel)]="user.emailConfig.emailPassword" type="password" name="emailPassword" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                        <h4 class="text-center">Imagen email bienvenida</h4>
+                        <table style="width: 100%">
+                            <tbody>
+                                <tr style="height: 150px;">
+                                    <td style="border: 1px solid lightgray">
+                                        <img *ngIf="user.email_img && !email_imgURL" bind-src="user.email_img ? (backendImgEmailUrl + user.email_img): noImage" style="height: 150px">
+
+                                        <input *ngIf="!user.email_img" (change)="selectEmailImage($event); preview('email', $event.target.files)" type="file" id="email_file">
+                                        <img *ngIf="email_imgURL" [src]="email_imgURL" style="height: 150px">
+                                    </td>
+                                    <td>
+                                        <button (click)="removeEmailImage(0)" class="btn btn-danger" *ngIf="user.email_img" style="margin-left: 20px; width: 40px; height: 150px;">X</button>
+                                        <button (click)="removeEmailImage(0)" class="btn btn-danger" *ngIf="!user.email_img" style="margin-left: 20px; width: 40px; height: 150px;" disabled>X</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button (click)="updateUser()" color="primary">Guardar cambios</button>
+                <!-- <button mat-raised-button (click)="cancel()" color="primary">Descartar cambios</button> -->
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>
+    <mat-tab label="Envíos y promociones" style="height: 100vh; padding:30px">
+        <h4 class="mt-5">Crear código de barras para promoción</h4>
+        <hr>
+        <div class="row">
+            <div class="col-3">
+                <br><br>
+                <small>Introduce código de barras:</small>
+                <br>
+                <input #barcode (keyup)="updateBarcode(barcode.value)">
+            </div>
+            <div class="col-4">
+                <div id="barcodePreview" style="width: 270px;">
+                    <svg id="barcode"></svg>
+                </div>
+                <button *ngIf="!blankBarcode" class="btn btn-success btn-block" (click)="downloadBarcode()">Descargar código de barras</button>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-7">
+                <h4 class="mt-5">Crear nueva promoción para envíos de WhatsApp</h4>
+                <hr>
+                <small>(Las imágenes se deben subir del tamaño deseado)</small>
+                <app-editor (updatePreview)="updatePreview($event)"></app-editor>
+            </div>
+            <div class="col-5">
+                <h4 class="mt-5">Vista previa</h4>
+                <hr>
+                <div *ngIf="!blankEditor" id="editorPreview" class="editor-preview">
+                </div>
+            </div>
+            <button *ngIf="!blankEditor" class="btn btn-success btn-block" (click)="downloadImage()">Descargar imagen</button>
+        </div>
+    </mat-tab>
+</mat-tab-group>

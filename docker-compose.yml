@@ -1,0 +1,98 @@
+version: "3"
+
+services:
+  mongo:
+    image: bitnami/mongodb:latest
+    environment: 
+      - MONGODB_ROOT_PASSWORD=ab.cd1/1
+      - MONGODB_USERNAME=fidelizApp1
+      - MONGODB_PASSWORD=fidelizApp1/1
+      - MONGODB_DATABASE=fidelizApp
+    volumes:
+      - $PWD/data/:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - database
+    container_name: mongo
+  mongo-express:
+    image: mongo-express
+    restart: always
+    labels:
+      - "traefik.backend=mongo-express"
+      - "traefik.frontend.rule=Host:admindb.fidelizapp.serantes.pro"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.port=8081"
+    links:
+      - mongo
+    environment:
+      - ME_CONFIG_OPTIONS_EDITORTHEME="ambiance"
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_BASICAUTH_USERNAME=dxestion
+      - ME_CONFIG_BASICAUTH_PASSWORD=Dxestion0180
+    networks:
+      - web
+      - database
+    container_name: mongo-express
+
+  backend:
+    build:
+      context: ./backend
+    links:
+      - mongo
+    labels:
+      - "traefik.backend=backend"
+      - "traefik.frontend.rule=Host:backend.fidelizapp.serantes.pro"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.port=3000"
+    depends_on:
+      - mongo
+    volumes:
+      - $PWD/uploads/:/user/src/app/uploads
+      - $PWD/logs/:/user/src/app/logs
+    networks:
+      - web
+      - database
+    container_name: backend
+
+  frontend-admin:
+    build:
+      context: ./frontend-admin-app
+    links:
+      - backend
+    labels:
+      - "traefik.backend=web-admin"
+      - "traefik.frontend.rule=Host:admin.fidelizapp.serantes.pro"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.port=80"
+    depends_on:
+      - mongo
+      - backend
+    networks:
+      - web
+    volumes:
+      - $PWD/nginx_conf:/etc/nginx/conf.d
+    container_name: web-admin
+  frontend-client:
+    build:
+      context: ./frontend-client-app
+    links:
+      - backend
+    labels:
+      - "traefik.backend=web-client"
+      - "traefik.frontend.rule=Host:fidelizapp.serantes.es, www.fidelizapp.serantes.pro, web.fidelizapp.serantes.pro"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.port=80"
+    depends_on:
+      - mongo
+      - backend
+    networks:
+      - web
+    volumes:
+      - $PWD/nginx_conf:/etc/nginx/conf.d
+    container_name: web-client
+networks:
+  web:
+    external: true
+  database:
+    internal: true

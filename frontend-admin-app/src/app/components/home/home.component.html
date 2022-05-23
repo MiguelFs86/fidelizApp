@@ -1,0 +1,58 @@
+<div class="container container-fluid">
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6" (click)="goToUsers()" *ngIf="auth.isAdmin()" style="margin-top: 40px; cursor: pointer;">
+            <div class="card custom-card">
+                <img src="assets/user_icon.png" class="card-img-top custom-img" alt="user_icon" />
+                <div class="card-body">
+                    <h5 class="card-title text-center"><u>Usuarios</u></h5>
+                    <p class="card-text custom-card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6" (click)="goToStores()" style="margin-top: 40px; cursor: pointer;">
+            <div class="card custom-card">
+                <img src="assets/store_icon.png" class="card-img-top custom-img" alt="store_icon" />
+                <div class="card-body">
+                    <h5 class="card-title text-center"><u>Tiendas</u></h5>
+                    <p class="card-text custom-card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6" (click)="goToLog()" *ngIf="auth.isAdmin()" style="margin-top: 40px; cursor: pointer;">
+            <div class="card custom-card">
+                <img src="assets/log_icon.png" class="card-img-top custom-img" alt="log_icon" />
+                <div class="card-body">
+                    <h5 class="card-title text-center"><u>Logs</u></h5>
+                    <p class="card-text custom-card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6" (click)="goToProfile()" style="margin-top: 40px; cursor: pointer;">
+            <div class="card custom-card">
+                <img src="assets/profile_icon.png" class="card-img-top custom-img" alt="profile_icon" />
+                <div class="card-body">
+                    <h5 class="card-title text-center"><u>Perfil</u></h5>
+                    <p class="card-text custom-card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6" (click)="goToSettings()" *ngIf="auth.isAdmin()" style="margin-top: 40px; cursor: pointer;">
+            <div class="card custom-card">
+                <img src="assets/settings_icon.png" class="card-img-top custom-img" alt="settings_icon" />
+                <div class="card-body">
+                    <h5 class="card-title text-center"><u>Ajustes</u></h5>
+                    <p class="card-text custom-card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6" (click)="logout()" style="margin-top: 40px; cursor: pointer;">
+            <div class="card custom-card">
+                <img src="assets/logout_icon.png" class="card-img-top custom-img" alt="logout_icon" />
+                <div class="card-body">
+                    <h5 class="card-title text-center"><u>Salir</u></h5>
+                    <p class="card-text custom-card-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

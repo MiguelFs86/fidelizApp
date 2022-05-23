@@ -1,0 +1,60 @@
+{
+	"LOGIN_PAGE": {
+		"TITLE": "Login",
+		"USER_PLACEHOLDER": "Username",
+		"PASSWORD_PLACEHOLDER": "Password",
+		"LOGIN": "Login"
+	},
+	"HOME_PAGE": {
+		"TITLE": "Client register",
+		"NAME": "Name",
+		"EMAIL": "Email",
+		"PHONE": "Phone",
+		"SIGNATURE": "Signature",
+		"SEND": "Send",
+		"GPDR": "I'm agree with the conditions and terms of use"
+	},
+	"EXIT_POPUP": {
+		"TITLE": "Enter code to exit",
+		"ACCEPT": "Accept",
+		"CANCEL": "Cancel"
+	},
+	"SUCCESS": {
+		"REGISTER_USER": "User created successfully",
+		"UPDATE_USER": "User updated successfully",
+		"REGISTER_STORE": "Store created successfully",
+		"UPDATE_STORE": "Store updated successfully",
+		"UPDATE_PROFILE": "Profile updated successfully"
+	},
+	"ERRORS": {
+		"ERROR_TYPE_1": "Server error",
+		"ERROR_TYPE_2": "There already exists an user with this username",
+		"ERROR_TYPE_3": "Failed on creating user",
+		"ERROR_TYPE_4": "User not found",
+		"ERROR_TYPE_5": "There is no user with that ID",
+		"ERROR_TYPE_6": "Error getting users",
+		"ERROR_TYPE_7": "You are not allowed to view this user",
+		"ERROR_TYPE_8": "User couldnt be deleted",
+		"ERROR_TYPE_9": "There already exists an store with this name",
+		"ERROR_TYPE_10": "Failed on creating store",
+		"ERROR_TYPE_11": "Store not found",
+		"ERROR_TYPE_12": "There is no store with that ID",
+		"ERROR_TYPE_13": "Error getting stores",
+		"ERROR_TYPE_14": "You are not allowed to view this store",
+		"ERROR_TYPE_15": "Store couldnt be deleted",
+		"ERROR_TYPE_16": "Client already exists",
+		"ERROR_TYPE_17": "Bad SQL statement",
+		"ERROR_TYPE_18": "Unable to connect with database server",
+		"ERROR_TYPE_19": "Client not found",
+		"ERROR_TYPE_20": "Error updating client",
+		"ERROR_TYPE_21": "No user/password were provided",
+		"ERROR_TYPE_22": "Wrong username/password",
+		"GPDR_ACCEPT": "You must accept the terms of user before sending your information",
+		"NAME": "You must enter your name",
+		"EMAIL": "You must enter your email",
+		"VALID_EMAIL": "You must enter a valid email",
+		"PHONE": "You must enter your phone",
+		"VALID_PHONE": "You must enter a valid phone",
+		"SIGNATURE": "You must fill the signature field"
+	}
+}

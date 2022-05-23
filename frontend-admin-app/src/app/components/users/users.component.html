@@ -1,0 +1,232 @@
+<mat-tab-group style="height: 100vh;" [selectedIndex]="selectedTab">
+    <mat-tab label="Lista de usuarios" style="height: 100vh; padding:30px">
+        <div *ngIf="userList">
+            <div *ngIf="userList.length > 0">
+                <br />
+                <div class="col-md-12 col-sm-6">
+                    <input #search class="form-control" id="searchTextId" (keyup)="searchUsers(search.value)" [ngModel]="searchText" name="search" placeholder="Buscar..." />
+                </div>
+                <div class="row" style="margin: 0px 20px 30px 20px">
+                    <div *ngFor="let user of userList" class="col-lg-3 col-md-4 col-sm-6" (click)="userDetail(user._id)" style="margin-top: 40px; cursor: pointer;">
+                        <div class="card custom-user-card" [ngStyle]="user.role == 'DISTRIBUTOR_ROLE' && {'background': '#b1f5c08a'}">
+                            <img bind-src="user.logo_img ? imagePath + user.logo_img : noImage" class="card-img-top custom-user-img" alt="{{ user.name }}" />
+                            <div class="card-body">
+                                <h5 class="card-title text-center text-capitalize">
+                                    <u>{{ user.name }}</u>
+                                </h5>
+                                <p class="card-text">
+                                    <b>Nombre de usuario: </b>{{ user.username }}
+                                </p>
+                                <p class="card-text">
+                                    <b>Email: </b>{{ user.email }}
+                                </p>
+                                <br />
+                                <div class="row text-center">
+                                    <button mat-raised-button color="primary" (click)="userStores(user)" style="margin: 0px auto;">
+									Ver tiendas
+								</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="userList.length === 0">
+                <br>
+                <div class="alert alert-info">No hay ningún usuario creado</div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab *ngIf="auth.isAdmin()" label="Registrar nuevo usuario" style="height: 100vh;">
+        <mat-card class="register-card text-center">
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-6">
+                        <form class="register-form">
+                            <table class="table-register" style="width: 90%" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Nombre de usuario" [(ngModel)]="user.username" name="username" required />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Password" [(ngModel)]="user.password" type="password" name="password" required />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Nombre" [(ngModel)]="user.name" name="name" required />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Email" [(ngModel)]="user.email" type="email" name="email" required />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Direccion" [(ngModel)]="user.address" name="address" required />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Twitter" [(ngModel)]="user.twitter" type="twitter" name="twitter" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Facebook" [(ngModel)]="user.facebook" type="facebook" name="facebook" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Instagram" [(ngModel)]="user.instagram" type="instagram" name="instagram" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Youtube" [(ngModel)]="user.youtube" type="youtube" name="youtube" />
+                                        </mat-form-field>
+                                    </td>
+								</tr>
+								<tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Página web" [(ngModel)]="user.website" type="website" name="website" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                            </table>
+						</form>
+						<br>
+                        <div *ngIf="auth.isAdmin()">
+                            <h4 class="text-center">Sincronización con Gmail</h4>
+                            <div class="register-full-width">
+                                <mat-checkbox name="googleSync" [(ngModel)]="gmailSyncFlag">¿Enlazar con cuenta de Gmail?</mat-checkbox>
+                            </div>
+                            <button mat-raised-button color="primary" (click)="gmailSync(user._id)">Test/Start sync</button>
+						</div>
+						<br><br>
+                        <div *ngIf="auth.isAdmin()">
+                            <h4 class="text-center">Rol de usuario</h4>
+                            <select style="width: 90%; height: 40px;" name="user" [(ngModel)]="user.role" required>
+								<option disabled hidden [ngValue]="0">{{ 'STORES_PAGE.CHOOSE_ONE' | translate }}</option>
+								<option style="height: 30px" *ngFor="let role of userRoles" [ngValue]="role">
+									{{ role == 'USER_ROLE' ? 'Usuario' : 'Distribuidor' }}
+								</option>
+							</select>
+                            <br>
+                            <h4 class="text-center">Distribuidor</h4>
+                            <select style="width: 90%; height: 40px;" name="user" [(ngModel)]="user.distributor" required>
+								<option disabled hidden [ngValue]="0">{{ 'STORES_PAGE.CHOOSE_ONE' | translate }}</option>
+								<option style="height: 30px" *ngFor="let distributor of distributorList" [ngValue]="distributor._id">
+									{{ distributor.username }}
+								</option>
+							</select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <h4 class="text-center">Logo</h4>
+                        <button (click)="removeLogoImage(0)" class="btn btn-danger" *ngIf="user.logo_img">X</button>
+                        <div style="height: 150px; border: 1px solid lightgray">
+                            <img *ngIf="user.logo_img" [src]="logo_imgURL" style="height: 150px">
+                            <input *ngIf="!user.logo_img" (change)="selectLogoImage($event); preview('logo', $event.target.files)" type="file" id="logo_file" style="margin-top: 70px">
+                        </div>
+                        <!-- Email stuff -->
+                        <br>
+                        <h4>Parámetros del email</h4>
+                        <form class="register-form">
+                            <table class=" table-register" style="width: 100%" *ngIf="user" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Servidor SMTP" [(ngModel)]="user.emailConfig.smtp" name="smtp" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Cuenta de correo" [(ngModel)]="user.emailConfig.emailAccount" type="email" name="emailAccount" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Puerto" [(ngModel)]="user.emailConfig.port" name="port" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Contraseña email" [(ngModel)]="user.emailConfig.emailPassword" type="password" name="emailPassword" />
+                                        </mat-form-field>
+                                    </td>
+								</tr>
+								<tr>
+									<td>
+										<mat-form-field class="register-full-width">
+                                            <input matInput placeholder="Email de prueba" [(ngModel)]="testEmail" type="" name="testEmail" />
+										</mat-form-field>
+										<button mat-raised-button color="primary" (click)="checkEmail()">Probar correo</button>
+									</td>
+								</tr>
+                            </table>
+						</form>
+						<br>
+                        <h4 class="text-center">Imagen del email</h4>
+                        <table style="width: 100%">
+                            <tbody>
+                                <tr style="height: 150px;">
+                                    <td style="border: 1px solid lightgray">
+                                        <img *ngIf="user.email_img && !email_imgURL" bind-src="user.email_img ? (imageEmailPath + user.email_img): noImage" style="height: 150px">
+
+                                        <input *ngIf="!user.email_img" (change)="selectEmailImage($event); preview('email', $event.target.files)" type="file" id="email_file">
+                                        <img *ngIf="email_imgURL" [src]="email_imgURL" style="height: 150px">
+                                    </td>
+                                    <td>
+                                        <button (click)="removeEmailImage(0)" class="btn btn-danger" *ngIf="user.email_img" style="margin-left: 20px; width: 40px; height: 150px;">X</button>
+                                        <button (click)="removeEmailImage(0)" class="btn btn-danger" *ngIf="!user.email_img" style="margin-left: 20px; width: 40px; height: 150px;" disabled>X</button>
+                                    </td>
+								</tr>
+								<tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <textarea matInput rows="5" placeholder="Texto de protección de datos" [(ngModel)]="user.email_text" name="gpdr" style="padding: 10px; border-radius: 10px; border: 1px solid lightgray;"></textarea>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button (click)="registerUser()" color="primary">
+					Registrar usuario
+				</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>
+</mat-tab-group>

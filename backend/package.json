@@ -1,0 +1,36 @@
+{
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node server/server.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^3.0.6",
+        "body-parser": "^1.19.0",
+        "compression": "^1.7.4",
+        "cookie-parser": "^1.4.4",
+        "express": "^4.16.3",
+        "express-fileupload": "^0.4.0",
+        "express-session": "^1.17.0",
+        "google-auth-library": "^1.6.1",
+        "googleapis": "^47.0.0",
+        "helmet": "^3.21.3",
+        "jsonwebtoken": "^8.3.0",
+        "moment": "^2.24.0",
+        "mongoose": "^5.2.6",
+        "mongoose-unique-validator": "^2.0.1",
+        "mssql": "^6.0.1",
+        "node-cron": "^2.0.3",
+        "nodemailer": "^6.4.1",
+        "nodemailer-express-handlebars": "^3.1.0",
+        "pg": "^7.12.1",
+        "socket.io": "^2.3.0",
+        "underscore": "^1.9.1",
+        "winston": "^3.2.1"
+    }
+}

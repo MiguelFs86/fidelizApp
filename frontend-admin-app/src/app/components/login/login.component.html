@@ -1,0 +1,29 @@
+<mat-card class="login-card a">
+    <mat-card-header>
+        <mat-card-title>{{ 'LOGIN_PAGE.TITLE' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="login-form">
+            <table class="login-full-width" cellspacing="0">
+                <tr>
+                    <td>
+                        <mat-form-field class="login-full-width">
+                            <input matInput placeholder="{{ 'LOGIN_PAGE.USER_PLACEHOLDER' | translate }}" [(ngModel)]="username" name="username" required>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="login-full-width">
+                            <input matInput placeholder="{{ 'LOGIN_PAGE.PASSWORD_PLACEHOLDER' | translate }}" [(ngModel)]="password" type="password" name="password" required>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button (click)="login()" color="primary">{{ 'LOGIN_PAGE.TITLE' | translate }}</button>
+    </mat-card-actions>
+</mat-card>

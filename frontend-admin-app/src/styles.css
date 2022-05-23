@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* Styles for login toaster */
+
+.mat-snack-bar-container {
+	background: #3f50b5;
+}
+
+.mat-simple-snackbar-action {
+	color: #3f50b5;
+}
+
+.mat-simple-snackbar-action button {
+	background: white;
+}
+
+.main-container {
+	margin-top: 30px;
+	padding: 0px 50px !important;
+}
+
+@media screen and (max-width: 991px) {
+	.main-container {
+		padding: 0px !important;
+	}
+}
+
+@media screen and (max-width: 840px) {
+	.main-container {
+		padding: 0px 50px !important;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.main-container {
+		padding: 0px !important;
+	}
+}
+
+.mat-tab-body-wrapper {
+	height: 100vh !important;
+}
+
+.custom-swal2-image {
+	border: 1px solid lightgray !important;
+	border-radius: 10px !important;
+}
+
+.register-full-width {
+	width: 90%;
+}

@@ -1,0 +1,60 @@
+{
+	"LOGIN_PAGE": {
+		"TITLE": "Iniciar sesión",
+		"USER_PLACEHOLDER": "Nombre de usuario",
+		"PASSWORD_PLACEHOLDER": "Contraseña",
+		"LOGIN": "Iniciar sesión"
+	},
+	"HOME_PAGE": {
+		"TITLE": "Alta de cliente",
+		"NAME": "Nombre",
+		"EMAIL": "Email",
+		"PHONE": "Teléfono",
+		"SIGNATURE": "Firma",
+		"SEND": "Enviar",
+		"GPDR": "Acepto las condiciones y los términos de uso"
+	},
+	"EXIT_POPUP": {
+		"TITLE": "Introduce la clave para salir",
+		"ACCEPT": "Aceptar",
+		"CANCEL": "Cancelar"
+	},
+	"SUCCESS": {
+		"REGISTER_USER": "Usuario creado correctamente",
+		"UPDATE_USER": "Usuario actualizado correctamente",
+		"REGISTER_STORE": "Establecimiento creado correctamente",
+		"UPDATE_STORE": "Establecimiento actualizado correctamente",
+		"UPDATE_PROFILE": "Perfil actualizado correctamente"
+	},
+	"ERRORS": {
+		"ERROR_TYPE_1": "Error en el servidor",
+		"ERROR_TYPE_2": "Ya existe un usuario con ese nombre de usuario",
+		"ERROR_TYPE_3": "Fallo al crear el usuario",
+		"ERROR_TYPE_4": "Usuario no encontrado",
+		"ERROR_TYPE_5": "No existe un usuario con ese ID",
+		"ERROR_TYPE_6": "Error obteniendo usuarios",
+		"ERROR_TYPE_7": "No tiene permisos para ver este usuario",
+		"ERROR_TYPE_8": "No se ha podido borrar el usuario",
+		"ERROR_TYPE_9": "Ya existe un establecimiento con ese nombre",
+		"ERROR_TYPE_10": "Fallo al crear el establecimiento",
+		"ERROR_TYPE_11": "Establecimiento no encontrado",
+		"ERROR_TYPE_12": "No existe un establecimiento con ese ID",
+		"ERROR_TYPE_13": "Error obteniendo establecimientos",
+		"ERROR_TYPE_14": "No tiene permisos para ver este establecimiento",
+		"ERROR_TYPE_15": "No se ha podido borrar el establecimiento",
+		"ERROR_TYPE_16": "El cliente ya existe",
+		"ERROR_TYPE_17": "Sentencia SQL mal generada",
+		"ERROR_TYPE_18": "Imposible conectar con el servidor de bases de datos",
+		"ERROR_TYPE_19": "Cliente no encontrado",
+		"ERROR_TYPE_20": "Error actualizando cliente",
+		"ERROR_TYPE_21": "Faltan el usuario y/o la contraseña",
+		"ERROR_TYPE_22": "Usuario y/o contraseña incorrectos",
+		"GPDR_ACCEPT": "Debe aceptar los términos y condiciones de uso antes de enviar la información",
+		"NAME": "Debe introducir su nombre",
+		"EMAIL": "Debe introducir su correo electrónico",
+		"VALID_EMAIL": "Debe introducir un correo electrónico válido",
+		"PHONE": "Debe introducir su teléfono",
+		"VALID_PHONE": "Debe introducir un teléfono válido",
+		"SIGNATURE": "Debe firmar la solicitud antes de enviarla"
+	}
+}

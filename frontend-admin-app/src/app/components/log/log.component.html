@@ -1,0 +1,38 @@
+<mat-tab-group style="height: 100vh;" [selectedIndex]="selectedTab">
+    <mat-tab label="Log actual" style="height: 100vh; padding:30px">
+        <div *ngIf="logMessages">
+            <div class="container" style="width: 75%; margin-top: 65px;">
+                <ul class="list-group" style="font-size: 14px">
+                    <li *ngFor="let message of logMessages" class="list-group-item" style="padding: 0.5rem 1.25rem" [ngClass]="{'text-blue':message.type === 'info', 'text-yellow':message.type === 'warn', 'text-red':message.type === 'error'}">
+                        {{ message.date }} - {{ message.hour }} || {{ message.type }} => {{ message.text }} <span *ngIf="message.user">"{{ message.user}}"</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Logs anteriores" style="height: 100vh; padding:30px">
+        <div class="text-center" style="margin-top: 20px">
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Selecciona una fecha" [(ngModel)]="selectedDate" (dateChange)="getOldLogFile(selectedDate)">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div *ngIf="oldLogMessages">
+            <div *ngIf="oldLogMessages.length > 0">
+                <div class="container" style="width: 75%; ">
+                    <ul class="list-group" style="font-size: 14px">
+                        <li *ngFor="let oldMessage of oldLogMessages" class="list-group-item" style="padding: 0.5rem 1.25rem" [ngClass]="{'text-blue': oldMessage.type === 'info', 'text-yellow': oldMessage.type === 'warn', 'text-red': oldMessage.type === 'error'}">
+                            {{ oldMessage.date }} - {{ oldMessage.hour }} || {{ oldMessage.type }} => {{ oldMessage.text }} <span *ngIf="oldMessage.user">"{{ oldMessage.user}}"</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div *ngIf="oldLogMessages.length === 0">
+                <div class="alert alert-info text-center">
+                    No hay log del día seleccionado
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

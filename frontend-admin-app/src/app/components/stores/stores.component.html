@@ -1,0 +1,198 @@
+<mat-tab-group style="height: 100vh;" [selectedIndex]="selectedTab">
+    <mat-tab label="Lista de tiendas" style="height: 100vh; padding:30px">
+        <div *ngIf="storeList">
+            <div *ngIf="storeList.length > 0">
+                <br>
+                <div class="col-md-12 col-sm-6">
+                    <input #search class="form-control" id="searchTextId" (keyup)="searchStores(search.value)" [ngModel]="searchText" name="search" placeholder="Buscar...">
+                </div>
+                <div class="row" *ngIf="storeList" style="margin: 0px 20px 30px 20px">
+                    <div *ngFor="let store of storeList" class="col-lg-3 col-md-4 col-sm-6" (click)="goToStore(store)" style="margin-top: 40px; cursor: pointer;">
+                        <div class="card custom-store-card">
+                            <img bind-src="store.logo_img ? (imagePath + store.logo_img): noImage" class="card-img-top custom-store-img" alt="{{ store.name }}">
+                            <div class="card-body">
+                                <h5 class="card-title text-center text-capitalize"><u>{{store.name}}</u></h5>
+                                <p class="card-text custom-store-card-text"><b>{{ 'STORES_PAGE.USERNAME' | translate }}: </b>{{ store.username }}</p>
+                                <p class="card-text custom-store-card-text"><b>{{ 'STORES_PAGE.EMAIL' | translate }}: </b>{{ store.email }}</p>
+                                <p *ngIf="store.store_type" class="card-text custom-store-card-text"><b>{{ 'STORES_PAGE.TYPE' | translate }}: </b>{{ store.store_type }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="storeList.length === 0">
+                <br>
+                <div class="alert alert-info">No hay ningún establecimiento creado</div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab *ngIf="auth.isAdmin()" label="Registrar nueva tienda" style="height: 100vh;">
+        <mat-card class="register-card text-center">
+            <mat-card-content>
+                <form class="register-form">
+                    <div class="row">
+                        <div class="col-6">
+                            <h4>{{ 'STORES_PAGE.SHOP_DATA' | translate }}</h4>
+                            <table class="table-register" width="100%" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="{{ 'STORES_PAGE.PLACEHOLDER_NAME' | translate }}" [(ngModel)]="newStore.name" name="name" required>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="{{ 'STORES_PAGE.PLACEHOLDER_USERNAME' | translate }}" [(ngModel)]="newStore.username" name="username" required>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="{{ 'STORES_PAGE.PLACEHOLDER_PASSWORD' | translate }}" [(ngModel)]="newStore.password" type="password" name="password" required>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="{{ 'STORES_PAGE.PLACEHOLDER_EMAIL' | translate }}" [(ngModel)]="newStore.email" type="email" name="email" required>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <textarea matInput rows="5" placeholder="Texto de protección de datos" [(ngModel)]="newStore.gpdr_text" name="gpdr" style="padding: 10px; border-radius: 10px; border: 1px solid lightgray;"></textarea>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-6" [ngClass]="{'background-red': connectionError === true, 'background-green': connectionError === false}">
+                            <h4>{{ 'STORES_PAGE.CONNECTION_DATA' | translate }}</h4>
+                            <table class="table-register" width="100%" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="{{ 'STORES_PAGE.PLACEHOLDER_DBURL' | translate }}" [(ngModel)]="newStore.database_url" name="database_url" required>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="{{ 'STORES_PAGE.PLACEHOLDER_DBPORT' | translate }}" [(ngModel)]="newStore.database_port" name="database_port" required>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="{{ 'STORES_PAGE.PLACEHOLDER_DBNAME' | translate }}" [(ngModel)]="newStore.database_name" name="database_name" required>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="{{ 'STORES_PAGE.PLACEHOLDER_DBUSERNAME' | translate }}" [(ngModel)]="newStore.database_username" name="database_username" required>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="register-full-width">
+                                            <input matInput placeholder="{{ 'STORES_PAGE.PLACEHOLDER_DBPASSWORD' | translate }}" [(ngModel)]="newStore.database_password" type="password" name="database_password" required>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="register-full-width">
+                                            <mat-checkbox name="commerce_password" [(ngModel)]="commerce_password">¿{{ 'STORES_PAGE.COMMERCE_PASSWORD' | translate }}?</mat-checkbox>
+                                        </div>
+                                        <mat-form-field *ngIf="commerce_password" class="register-full-width">
+                                            <input matInput placeholder="{{ 'STORES_PAGE.COMMERCE_PASSWORD' | translate }}" [(ngModel)]="newStore.commerce_password" type="password" name="commerce_password">
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="freeFields && freeFields.length > 0">
+                                    <br>
+                                    <h4>Campos libres activados</h4>
+                                    <table class="table table-bordered table-responsive text-left" style="max-width: 470px; margin: 20px 0px;">
+                                        <thead>
+                                            <tr>
+                                                <th>Pedir</th>
+                                                <th>Nombre</th>
+                                                <th>Tipo</th>
+                                                <th>Valores</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let ff of freeFields">
+                                                <td *ngIf="ff">
+                                                    <mat-checkbox name="active" [(ngModel)]="ff.active"></mat-checkbox>
+                                                </td>
+                                                <td *ngIf="ff">{{ ff.name }}</td>
+                                                <td *ngIf="ff">{{ ff.type }}</td>
+                                                <td *ngIf="ff && ff.values.length > 0">{{ ff.values }}</td>
+                                                <td *ngIf="ff && ff.values.length === 0">SI/NO</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </tr>
+                                <tr style="margin: 20px 0px;">
+                                    <td>
+                                        <button *ngIf="newStore.store_type === 'Agora'" mat-raised-button style="height: 40px; font-size:18px" (click)="testConnection('agora')" color="primary">Probar conexión</button>
+                                        <button *ngIf="newStore.store_type !== 'Agora'" mat-raised-button style="height: 40px; font-size:18px" (click)="testConnection('icg')" color="primary">Probar conexión y obtener campos libres</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-6">
+                            <h4 class="text-center">{{ 'STORES_PAGE.LOGO' | translate }}</h4>
+                            <button (click)="removeImage(0)" class="btn btn-danger" *ngIf="newStore.logo_img">X</button>
+                            <div style="height: 150px; border: 1px solid lightgray">
+                                <img *ngIf="newStore.logo_img" [src]="logo_imgURL" style="height: 150px">
+                                <input *ngIf="!newStore.logo_img" (change)="selectLogoImage($event); preview(0, $event.target.files)" type="file" id="logo_file" style="margin-top: 70px">
+                            </div>
+                            <br>
+                            <h4 class="text-center">{{ 'STORES_PAGE.BACKGROUND' | translate }}</h4>
+                            <div *ngFor="let i of [0,1,2,3,4]" style="height: 250px; border: 1px solid lightgray; margin-bottom: 20px;">
+                                <input #imageInput *ngIf="!selectedFiles[i] && !newStore.background_img[i]" type="file" accept="image/*" (change)="processFile(imageInput, i)" style="margin-top: 100px;">
+                                <button *ngIf="selectedFiles[i] || newStore.background_img[i]" (click)="removeImage(1, i)" class="btn btn-danger">X</button>
+                                <div *ngIf="selectedFiles.length > 0" class="img-preview-container">
+                                    <div *ngIf="selectedFiles[i]" class="img-preview{{selectedFiles[i].status === 'fail' ? '-error' : ''}}" [ngStyle]="{'background-image': 'url('+ selectedFiles[i].src + ')'}"></div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="text-center">{{ 'STORES_PAGE.STORE_TYPE' | translate }}</h4>
+                            <select style="width: 90%; height: 40px;" name="store_type" [(ngModel)]="newStore.store_type" required>
+								<option disabled hidden [ngValue]="0">{{ 'STORES_PAGE.CHOOSE_ONE' | translate }}</option>
+								<option style="height: 30px" *ngFor="let type of storeTypes" [ngValue]="type">{{ type }}</option>
+							</select>
+                            <h4 class="text-center">{{ 'STORES_PAGE.USER' | translate }}</h4>
+                            <select style="width: 90%; height: 40px;" name="user" [(ngModel)]="newStore.user" required>
+								<option disabled hidden [ngValue]="0">{{ 'STORES_PAGE.CHOOSE_ONE' | translate }}</option>
+								<option style="height: 30px" *ngFor="let user of userList" [ngValue]="user._id">{{ user.username }}</option>
+							</select>
+                            <mat-card-actions style="margin-top: 50px">
+                                <button mat-raised-button style="height: 70px; font-size:30px" (click)="registerStore()" color="primary">{{ 'STORES_PAGE.REGISTER' | translate }}</button>
+                            </mat-card-actions>
+                        </div>
+                    </div>
+                </form>
+                <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+            </mat-card-content>
+        </mat-card>
+    </mat-tab>
+    <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+</mat-tab-group>

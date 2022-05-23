@@ -1,0 +1,68 @@
+{
+	"LOGIN_PAGE": {
+		"TITLE": "Iniciar sesión",
+		"USER_PLACEHOLDER": "Nombre de usuario",
+		"PASSWORD_PLACEHOLDER": "Contraseña"
+	},
+	"NAVBAR_PAGE": {
+		"HOME": "Inicio",
+		"ADD_NEW_USER": "Añadir usuario",
+		"LIST_USERS": "Lista de usuarios",
+		"LIST_STORES": "Lista de tiendas",
+		"LOGOUT": "Salir"
+	},
+	"STORES_PAGE": {
+		"USERNAME": "Usuario",
+		"EMAIL": "Email",
+		"TYPE": "Tipo",
+		"SHOP_DATA": "Datos del establecimiento",
+		"CONNECTION_DATA": "Datos de conexión",
+		"LOGO": "Logo",
+		"BACKGROUND": "Fondo",
+		"STORE_TYPE": "Tipo de establecimiento",
+		"USER": "Usuario",
+		"CHOOSE_ONE": "--- Selecciona ---",
+		"REGISTER": "Registrar tienda",
+		"COMMERCE_PASSWORD": "Password commerce",
+		"PLACEHOLDER_NAME": "Nombre",
+		"PLACEHOLDER_USERNAME": "Nombre de usuario",
+		"PLACEHOLDER_EMAIL": "Email",
+		"PLACEHOLDER_PASSWORD": "Password",
+		"PLACEHOLDER_DBNAME": "Nombre de BD",
+		"PLACEHOLDER_DBUSERNAME": "Usuario de la BD",
+		"PLACEHOLDER_DBURL": "URL de la BD",
+		"PLACEHOLDER_DBPASSWORD": "Password de la BD",
+		"PLACEHOLDER_DBPORT": "Puerto de la BD"
+	},
+	"SUCCESS": {
+		"REGISTER_USER": "Usuario creado correctamente",
+		"UPDATE_USER": "Usuario actualizado correctamente",
+		"REGISTER_STORE": "Establecimiento creado correctamente",
+		"UPDATE_STORE": "Establecimiento actualizado correctamente",
+		"UPDATE_PROFILE": "Perfil actualizado correctamente"
+	},
+	"ERRORS": {
+		"ERROR_TYPE_1": "Error en el servidor",
+		"ERROR_TYPE_2": "Ya existe un usuario con ese nombre de usuario",
+		"ERROR_TYPE_3": "Fallo al crear el usuario",
+		"ERROR_TYPE_4": "Usuario no encontrado",
+		"ERROR_TYPE_5": "No existe un usuario con ese ID",
+		"ERROR_TYPE_6": "Error obteniendo usuarios",
+		"ERROR_TYPE_7": "No tiene permisos para ver este usuario",
+		"ERROR_TYPE_8": "No se ha podido borrar el usuario",
+		"ERROR_TYPE_9": "Ya existe un establecimiento con ese nombre",
+		"ERROR_TYPE_10": "Fallo al crear el establecimiento",
+		"ERROR_TYPE_11": "Establecimiento no encontrado",
+		"ERROR_TYPE_12": "No existe un establecimiento con ese ID",
+		"ERROR_TYPE_13": "Error obteniendo establecimientos",
+		"ERROR_TYPE_14": "No tiene permisos para ver este establecimiento",
+		"ERROR_TYPE_15": "No se ha podido borrar el establecimiento",
+		"ERROR_TYPE_16": "El cliente ya existe",
+		"ERROR_TYPE_17": "Sentencia SQL mal generada",
+		"ERROR_TYPE_18": "Imposible conectar con el servidor de bases de datos",
+		"ERROR_TYPE_19": "Cliente no encontrado",
+		"ERROR_TYPE_20": "Error actualizando cliente",
+		"ERROR_TYPE_21": "Faltan el usuario y/o la contraseña",
+		"ERROR_TYPE_22": "Usuario y/o contraseña incorrectos"
+	}
+}

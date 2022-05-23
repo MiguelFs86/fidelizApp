@@ -1,0 +1,83 @@
+<div class="fixed-background"></div>
+<main style="margin-top: -50px !important;">
+	<div class="container">
+		<div class="row h-100">
+			<div class="col-12 col-md-12 mx-auto my-auto">
+				<div class="card auth-card">
+					<div class="position-relative image-side"></div>
+					<div class="form-side" style="padding: 20px">
+						<div class="text-center">
+							<span class="" style="margin-bottom: 20px;">
+								<img [src]="logoImg" style="height: 70px; margin-bottom: 10px;">
+							</span>
+						</div>
+						<h6 class="mb-5" style="font-size: 22px">Alta de cliente</h6>
+						<form style="font-size: 18px;">
+							<label class="form-group has-float-label mb-4 custom-label">
+								<input style="font-size: 16px" name="name" class="form-control"
+									[(ngModel)]="client.name" (ngModelChange)="client.name = $event.toUpperCase()"
+									required />
+								<span>Nombre y apellidos</span>
+							</label>
+
+							<label class="form-group has-float-label mb-4 custom-label">
+								<input style="font-size: 16px" name="email" type="email" class="form-control"
+									[(ngModel)]="client.email"
+									pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+									required />
+								<span>Email</span>
+							</label>
+
+							<label class="form-group has-float-label mb-4 custom-label">
+								<input style="font-size: 16px" name="phone" class="form-control"
+									[(ngModel)]="client.phone" required />
+								<span>Teléfono</span>
+							</label>
+
+							<label class="form-group has-float-label mb-4 custom-label">
+								<!-- <textarea rows="4" cols="50"></textarea> -->
+								<signature-pad class="signature-pad" [options]="signaturePadOptions"
+									(onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+								<span>Firma</span>
+							</label>
+							<button style="font-size: 16px" type="button" class="btn btn-xs btn-outline-dark mb-4"
+								(click)="clearSignaturePad()">Limpiar firma</button>
+							<div class="custom-control custom-checkbox mb-4">
+								<input type="checkbox" class="custom-control-input" id="category1"
+									[(ngModel)]="client.gpdr" (click)="showGPDR(!client.gpdr)" name="gpdr" required>
+								<label class="custom-control-label" for="category1">Acepto los términos y condiciones de
+									uso</label>
+							</div>
+							<div class="d-flex justify-content-between align-items-center">
+								<button *ngIf="!loading" class="btn btn-primary btn-block btn-lg btn-shadow"
+									style="height: 50px;" type="submit" (click)="registerClient()">ENVIAR</button>
+								<div *ngIf="loading" class="sk-fading-circle">
+									<div class="sk-circle1 sk-circle"></div>
+									<div class="sk-circle2 sk-circle"></div>
+									<div class="sk-circle3 sk-circle"></div>
+									<div class="sk-circle4 sk-circle"></div>
+									<div class="sk-circle5 sk-circle"></div>
+									<div class="sk-circle6 sk-circle"></div>
+									<div class="sk-circle7 sk-circle"></div>
+									<div class="sk-circle8 sk-circle"></div>
+									<div class="sk-circle9 sk-circle"></div>
+									<div class="sk-circle10 sk-circle"></div>
+									<div class="sk-circle11 sk-circle"></div>
+									<div class="sk-circle12 sk-circle"></div>
+								</div>
+								<!-- <button (click)="flip()">Flip</button> -->
+							</div>
+							<br>
+							<div class="row text-center">
+								<span style="font-size: 12px; display: inline-block;">
+									Powered by&nbsp;&nbsp;<img src="assets/img/logo-black.svg"
+										style="width: 30%; margin-top: -7px">
+								</span>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
