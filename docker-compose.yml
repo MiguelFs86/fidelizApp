@@ -2,7 +2,7 @@ version: "3"
 
 services:
   mongo:
-    image: bitnami/mongodb:latest
+    image: bitnami/mongodb:3.6.13-r33
     environment: 
       - MONGODB_ROOT_PASSWORD=ab.cd1/1
       - MONGODB_USERNAME=fidelizApp1
@@ -80,7 +80,7 @@ services:
       - backend
     labels:
       - "traefik.backend=web-client"
-      - "traefik.frontend.rule=Host:fidelizapp.serantes.es, www.fidelizapp.serantes.pro, web.fidelizapp.serantes.pro"
+      - "traefik.frontend.rule=Host:fidelizapp.serantes.pro, www.fidelizapp.serantes.pro, web.fidelizapp.serantes.pro"
       - "traefik.frontend.entryPoints=http,https"
       - "traefik.port=80"
     depends_on:

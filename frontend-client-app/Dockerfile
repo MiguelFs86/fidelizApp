@@ -11,7 +11,7 @@ COPY package.json package-lock.json ./
 
 RUN npm install
 
-RUN npm install -g @angular/cli@8.2.14
+RUN npm install -g @angular/cli@8.3.0
 
 # Copy project files into the docker image
 COPY . .
