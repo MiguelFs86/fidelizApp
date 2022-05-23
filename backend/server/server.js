@@ -49,9 +49,9 @@ const origins = [
 
 /* Add headers */
 app.use((req, res, next) => {
-	for (let i = 0; i < origins.length; i++) {
-		res.header('Access-Control-Allow-Origin', origins[i]);
-	}
+	const origin = req.get('origin');
+	console.log(origin);
+	res.header('Access-Control-Allow-Origin', origins[0]);
 	res.header('Access-Control-Allow-Credentials', true);
 	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
 	res.header(
