@@ -18,7 +18,7 @@ COPY . .
 RUN npm install pm2 -g
 
 ENV NODE_ENV prod
-ENV BACKEND_URL https://backend.fidelizapp.es
+ENV BACKEND_URL https://backend.fidelizapp.serantes.pro
 ENV MONGO_URI mongodb://mongo:27017/fidelizApp
 ENV DB_USERNAME fidelizApp1
 ENV DB_PWD fidelizApp2022
