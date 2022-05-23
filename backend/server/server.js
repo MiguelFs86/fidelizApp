@@ -40,10 +40,17 @@ app.use(cookieParser());
 /* Add express sessions middleware */
 app.use(session({ secret: 'session-secret', resave: false, saveUninitialized: true, cookie: { secure: true } }));
 
+const origins = [
+	'https://admin.fidelizapp.serantes.pro',
+	'https://fidelizapp.serantes.pro',
+	'https://www.fidelizapp.serantes.pro',
+	'https://web.fidelizapp.serantes.pro',
+]
+
 /* Add headers */
 app.use((req, res, next) => {
 	const origin = req.get('origin');
-	res.header('Access-Control-Allow-Origin', origin);
+	res.header('Access-Control-Allow-Origin', origins[0]);
 	res.header('Access-Control-Allow-Credentials', true);
 	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
 	res.header(
