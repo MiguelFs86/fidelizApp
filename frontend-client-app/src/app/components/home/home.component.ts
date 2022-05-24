@@ -77,13 +77,13 @@ export class HomeComponent implements OnInit {
 			this.backgroundImg =
 				this.imagePath + sessionStorage.getItem('bg_image');
 		} else {
-			this.backgroundImg = '../../../assets/bg-heading-03.jpg';
+			// this.backgroundImg = '../../../assets/bg-heading-03.jpg';
 		}
 
 		if (sessionStorage.getItem('logo_image')) {
 			this.logoImg = this.logoPath + sessionStorage.getItem('logo_image');
 		} else {
-			this.logoImg = '../../../assets/bg-heading-03.jpg';
+			// this.logoImg = '../../../assets/bg-heading-03.jpg';
 		}
 	}
 
