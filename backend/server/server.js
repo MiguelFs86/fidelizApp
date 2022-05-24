@@ -16,6 +16,7 @@ const cron = require('./utils/crontasks');
 const helmet = require('helmet');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 /* Init services that require socket connection */
 require('./utils/session').initSession(io);
@@ -40,32 +41,26 @@ app.use(cookieParser());
 /* Add express sessions middleware */
 app.use(session({ secret: 'session-secret', resave: false, saveUninitialized: true, cookie: { secure: true } }));
 
-const origins = [
-	'https://admin.fidelizapp.serantes.pro',
-	'https://fidelizapp.serantes.pro',
-	'https://www.fidelizapp.serantes.pro',
-	'https://web.fidelizapp.serantes.pro',
-]
-
 /* Add headers */
-app.use((req, res, next) => {
-	const origin = req.get('origin');
-	console.log(origin);
-	res.header('Access-Control-Allow-Origin', origins[0]);
-	res.header('Access-Control-Allow-Credentials', true);
-	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-	res.header(
-		'Access-Control-Allow-Headers',
-		'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma'
-	);
 
-	/* intercept OPTIONS method */
-	if (req.method === 'OPTIONS') {
-		res.sendStatus(204);
-	} else {
-		next();
-	}
-});
+app.use(cors());
+// app.use((req, res, next) => {
+// 	const origin = req.get('origin');
+// 	console.log(origin);
+// 	res.header('Access-Control-Allow-Origin', origins[0]);
+// 	res.header('Access-Control-Allow-Credentials', true);
+// 	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+// 	res.header(
+// 		'Access-Control-Allow-Headers',
+// 		'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma'
+// 	);
+
+// 	if (req.method === 'OPTIONS') {
+// 		res.sendStatus(204);
+// 	} else {
+// 		next();
+// 	}
+// });
 
 /* Allow file uploading */
 app.use(fileUpload());
