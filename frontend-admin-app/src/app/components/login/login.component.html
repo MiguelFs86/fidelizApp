@@ -15,7 +15,7 @@
                 <tr>
                     <td>
                         <mat-form-field class="login-full-width">
-                            <input matInput placeholder="{{ 'LOGIN_PAGE.PASSWORD_PLACEHOLDER' | translate }}" [(ngModel)]="password" type="password" name="password" required>
+                            <input matInput (keyup.enter)="login()" placeholder="{{ 'LOGIN_PAGE.PASSWORD_PLACEHOLDER' | translate }}" [(ngModel)]="password" type="password" name="password" required>
                         </mat-form-field>
                     </td>
                 </tr>

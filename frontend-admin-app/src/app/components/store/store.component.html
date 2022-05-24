@@ -52,130 +52,39 @@
                             </div>
                         </div>
                         <div class="col-6" *ngIf="auth.isAdmin()" [ngClass]="{'background-red': connectionError === true, 'background-green': connectionError === false}">
-                            <h4>{{ 'STORES_PAGE.CONNECTION_DATA' | translate }}</h4>
-                            <table class="table-register" width="100%" cellspacing="0">
-                                <tr>
-                                    <td>
-                                        <mat-form-field class="register-full-width">
-                                            <input matInput placeholder="{{ 'STORES_PAGE.PLACEHOLDER_DBURL' | translate }}" [(ngModel)]="store.database_url" name="database_url" required>
-                                        </mat-form-field>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <mat-form-field class="register-full-width">
-                                            <input matInput placeholder="{{ 'STORES_PAGE.PLACEHOLDER_DBPORT' | translate }}" [(ngModel)]="store.database_port" name="database_port" required>
-                                        </mat-form-field>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <mat-form-field class="register-full-width">
-                                            <input matInput placeholder="{{ 'STORES_PAGE.PLACEHOLDER_DBNAME' | translate }}" [(ngModel)]="store.database_name" name="database_name" required>
-                                        </mat-form-field>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <mat-form-field class="register-full-width">
-                                            <input matInput placeholder="{{ 'STORES_PAGE.PLACEHOLDER_DBUSERNAME' | translate }}" [(ngModel)]="store.database_username" name="database_username" required>
-                                        </mat-form-field>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <mat-form-field class="register-full-width">
-                                            <input matInput placeholder="{{ 'STORES_PAGE.PLACEHOLDER_DBPASSWORD' | translate }}" [(ngModel)]="store.database_password" type="password" name="database_password" required>
-                                        </mat-form-field>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="register-full-width">
-                                            <mat-checkbox name="commerce_password" [(ngModel)]="commerce_password">
-                                                ¿{{ 'STORES_PAGE.COMMERCE_PASSWORD' | translate }}?
-                                            </mat-checkbox>
-                                        </div>
-                                        <mat-form-field *ngIf="commerce_password" class="register-full-width">
-                                            <input matInput placeholder="{{ 'STORES_PAGE.COMMERCE_PASSWORD' | translate }}" [(ngModel)]="store.commerce_password" type="password" name="commerce_password">
-                                        </mat-form-field>
-                                    </td>
-                                </tr>
-                                <tr *ngIf="store.store_type !== 'Agora' && freeFields && freeFields.length > 0">
-                                    <br>
-                                    <h4>Campos libres activados</h4>
-                                    <table class="table table-bordered table-responsive text-left" style="max-width: 470px; margin: 20px 0px;">
-                                        <thead>
-                                            <tr>
-                                                <th>Pedir</th>
-                                                <th>Nombre</th>
-                                                <th>Tipo</th>
-                                                <th>Valores</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let ff of freeFields">
-                                                <td *ngIf="ff">
-                                                    <mat-checkbox name="active" [(ngModel)]="ff.active"></mat-checkbox>
-                                                </td>
-                                                <td *ngIf="ff">{{ ff.name }}</td>
-                                                <td *ngIf="ff">{{ ff.type }}</td>
-                                                <td *ngIf="ff && ff.values.length > 0">{{ ff.values }}</td>
-                                                <td *ngIf="ff && ff.values.length === 0">SI/NO</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </tr>
-                                <tr style="margin: 20px 0px;">
-                                    <td>
-                                        <!-- <button mat-raised-button style="height: 40px; font-size:18px" (click)="testConnection()" color="primary">Probar conexión y obtener campos libres</button> -->
-                                        <button *ngIf="store.store_type === 'Agora'" mat-raised-button style="height: 40px; font-size:18px" (click)="testConnection('agora')" color="primary">Probar conexión</button>
-                                        <button *ngIf="store.store_type !== 'Agora'" mat-raised-button style="height: 40px; font-size:18px" (click)="testConnection('icg')" color="primary">Probar conexión y obtener campos libres</button>
-                                    </td>
-                                </tr>
-                            </table>
+													<h4 class="text-center">{{ 'STORES_PAGE.LOGO' | translate }}</h4>
+													<button (click)="removeImage(0)" class="btn btn-danger" *ngIf="store.logo_img">X</button>
+													<div style="height: 150px; border: 1px solid lightgray">
+															<img *ngIf="store.logo_img" [src]="imagePath + store.logo_img" style="height: 150px">
+															<input *ngIf="!store.logo_img" (change)="selectLogoImage($event); preview(0, $event.target.files)" type="file" id="logo_file" style="margin-top: 70px">
+													</div>
+													<br>
+													<!-- <h4 class="text-center">{{ 'STORES_PAGE.BACKGROUND' | translate }}</h4>
+													<div *ngFor="let i of [0,1,2,3,4]" style="height: 250px; border: 1px solid lightgray; margin-bottom: 20px;">
+															<input #imageInput *ngIf="!selectedFiles[i] && !store.background_img[i]" type="file" accept="image/*" (change)="processFile(imageInput, i)" style="margin-top: 100px;">
+															<button *ngIf="selectedFiles[i] || store.background_img[i]" (click)="removeImage(1, i)" class="btn btn-danger">X</button>
+															<div *ngIf="selectedFiles.length > 0" class="img-preview-container">
+																	<div *ngIf="selectedFiles[i]" class="img-preview{{selectedFiles[i].status === 'fail' ? '-error' : ''}}" [ngStyle]="{'background-image': 'url('+ selectedFiles[i].src + ')'}"></div>
+															</div>
+															<div *ngIf="store.background_img[i]" class="img-preview-container">
+																	<img class="img-preview" [src]="BGimagePath + store.background_img[i]">
+															</div>
+															<br>
+													</div> -->
                             <br>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col-6">
-                            <h4 class="text-center">{{ 'STORES_PAGE.LOGO' | translate }}</h4>
-                            <button (click)="removeImage(0)" class="btn btn-danger" *ngIf="store.logo_img">X</button>
-                            <div style="height: 150px; border: 1px solid lightgray">
-                                <img *ngIf="store.logo_img" [src]="imagePath + store.logo_img" style="height: 150px">
-                                <input *ngIf="!store.logo_img" (change)="selectLogoImage($event); preview(0, $event.target.files)" type="file" id="logo_file" style="margin-top: 70px">
-                            </div>
-                            <br>
-                            <h4 class="text-center">{{ 'STORES_PAGE.BACKGROUND' | translate }}</h4>
-                            <div *ngFor="let i of [0,1,2,3,4]" style="height: 250px; border: 1px solid lightgray; margin-bottom: 20px;">
-                                <input #imageInput *ngIf="!selectedFiles[i] && !store.background_img[i]" type="file" accept="image/*" (change)="processFile(imageInput, i)" style="margin-top: 100px;">
-                                <button *ngIf="selectedFiles[i] || store.background_img[i]" (click)="removeImage(1, i)" class="btn btn-danger">X</button>
-                                <div *ngIf="selectedFiles.length > 0" class="img-preview-container">
-                                    <div *ngIf="selectedFiles[i]" class="img-preview{{selectedFiles[i].status === 'fail' ? '-error' : ''}}" [ngStyle]="{'background-image': 'url('+ selectedFiles[i].src + ')'}"></div>
-                                </div>
-                                <div *ngIf="store.background_img[i]" class="img-preview-container">
-                                    <img class="img-preview" [src]="BGimagePath + store.background_img[i]">
-                                </div>
-                                <br>
-                            </div>
-                        </div>
-                        <div class="col-6">
+                        <div class="col-12">
                             <div *ngIf="auth.isAdmin()">
-                                <h4 class="text-center">{{ 'STORES_PAGE.STORE_TYPE' | translate }}</h4>
-                                <select style="width: 90%; height: 40px;" name="store_type" [(ngModel)]="store.store_type" required>
-									<option disabled hidden [ngValue]="0">{{ 'STORES_PAGE.CHOOSE_ONE' | translate }}
-									</option>
-									<option style="height: 30px" *ngFor="let type of storeTypes" [ngValue]="type">
-										{{ type }}</option>
-								</select>
                                 <h4 class="text-center">{{ 'STORES_PAGE.USER' | translate }}</h4>
                                 <select style="width: 90%; height: 40px;" name="user" [(ngModel)]="store.user" required>
-									<option disabled hidden [ngValue]="0">{{ 'STORES_PAGE.CHOOSE_ONE' | translate }}
-									</option>
-									<option style="height: 30px" *ngFor="let user of userList" [ngValue]="user._id">
-										{{ user.username }}</option>
-								</select>
+																	<option disabled hidden [ngValue]="0">{{ 'STORES_PAGE.CHOOSE_ONE' | translate }}
+																	</option>
+																	<option style="height: 30px" *ngFor="let user of userList" [ngValue]="user._id">
+																		{{ user.username }}</option>
+																</select>
                             </div>
                             <mat-card-actions style="margin-top: 50px">
                                 <button mat-raised-button style="height: 70px; font-size:30px" (click)="updateStore()" color="primary">Actualizar tienda</button>

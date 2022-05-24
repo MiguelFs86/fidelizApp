@@ -44,13 +44,10 @@ export class UserComponent implements OnInit {
 	blankEditor = true;
 	blankQRrcode = true;
 	qrCode = '';
-	abc = '';
 
 	section = 0;
 
 	testEmail = '';
-
-	userRoles = [ 'USER_ROLE', 'DISTRIBUTOR_ROLE' ];
 
 	preview(type: any, files: any) {
 		if (files.length === 0) {
@@ -209,7 +206,6 @@ export class UserComponent implements OnInit {
 	}
 
 	updateQRrcode(text) {
-		console.log('launch');
 		this.blankQRrcode = false;
 		this.qrCode = text;
 	}

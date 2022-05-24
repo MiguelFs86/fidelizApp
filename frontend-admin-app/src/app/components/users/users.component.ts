@@ -34,7 +34,6 @@ export class UsersComponent implements OnInit {
 	usersListFiltered: any[];
 	selectedTab;
 	message: any;
-	userRoles = [ 'USER_ROLE', 'DISTRIBUTOR_ROLE' ];
 	distributorList: any;
 	gmailSyncFlag = false;
 
@@ -47,7 +46,6 @@ export class UsersComponent implements OnInit {
 		email: '',
 		logo_img: '',
 		email_img: '',
-		role: '',
 		address: '',
 		twitter: '',
 		facebook: '',
@@ -80,7 +78,6 @@ export class UsersComponent implements OnInit {
 			email: '',
 			logo_img: '',
 			email_img: '',
-			role: '',
 			address: '',
 			twitter: '',
 			facebook: '',

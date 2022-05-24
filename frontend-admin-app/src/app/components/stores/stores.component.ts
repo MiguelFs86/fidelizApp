@@ -26,17 +26,9 @@ export class StoresComponent implements OnInit {
 		password: '',
 		name: '',
 		email: '',
-		database_url: '',
-		database_name: '',
-		database_port: '',
-		database_username: '',
-		database_password: '',
 		background_img: [],
 		logo_img: '',
-		store_type: '',
-		commerce_password: '',
 		user: '',
-		selected_free_fields: '',
 		gpdr_text: ''
 	};
 
@@ -56,10 +48,7 @@ export class StoresComponent implements OnInit {
 	logo_imgURL: any;
 	message: any;
 	commerce_password: boolean = false;
-	storeTypes = [ 'FrontRetail/Manager', 'Manager', 'FrontRetail', 'FrontRest/Manager', 'FrontRest', 'Agora' ];
 	selectedFiles: ImageSnippet[] = [];
-	freeFields = [];
-	connectionError = null;
 
 	constructor(
 		public auth: AuthService,
@@ -128,14 +117,6 @@ export class StoresComponent implements OnInit {
 			Swal.fire('Error', 'Debe seleccionar un tipo de tienda', 'error');
 			return;
 		}
-
-		this.newStore.free_fields = this.freeFields.map((value: any) => {
-			if (value && value.active) {
-				return value;
-			}
-		});
-
-		this.newStore.selected_free_fields = JSON.stringify(this.newStore.free_fields);
 
 		this.storeService
 			.registerStore(this.newStore)
@@ -223,27 +204,5 @@ export class StoresComponent implements OnInit {
 
 		reader.readAsDataURL(file);
 		// this.newStore.background_img[index] = null;
-	}
-
-	testConnection(type: string) {
-		const data = {
-			database_url: this.newStore.database_url,
-			database_password: this.newStore.database_password,
-			database_name: this.newStore.database_name,
-			database_port: this.newStore.database_port,
-			database_username: this.newStore.database_username
-		};
-		this.storeService.checkStoreConnection(data, type).subscribe((response: any) => {
-			if (response.ok) {
-				this.freeFields = response.free_fields.free_fields;
-				Swal.fire('Exito', 'Conexión realizada', 'success').then(() => {
-					this.connectionError = false;
-				});
-			} else {
-				Swal.fire('Fallo', 'No es posible conectar con el servidor', 'error').then(() => {
-					this.connectionError = true;
-				});
-			}
-		});
 	}
 }

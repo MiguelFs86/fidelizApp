@@ -33,20 +33,11 @@ export class StoreComponent implements OnInit {
 		password: '',
 		name: '',
 		email: '',
-		database_url: '',
-		database_password: '',
-		database_name: '',
-		database_port: '',
-		database_username: '',
 		user: '',
-		store_type: '',
-		commerce_password: '',
 		logo_img: '',
 		background_img: [],
-		free_fields: [],
-		selected_free_fields: '',
 		gpdr_text: '',
-		allowed_connections: 50000
+		allowed_connections: 5000000
 	};
 	userList: any;
 	logo_imgURL: any;
@@ -58,14 +49,13 @@ export class StoreComponent implements OnInit {
 	message = '';
 	clients = [];
 	commerce_password = false;
-	storeTypes = [ 'FrontRetail/Manager', 'FrontRetail', 'FrontRest/Manager', 'Manager', 'FrontRest', 'Agora' ];
 	signaturePath = AppComponent.BACKEND_URL + '/files/client/signature/';
 	user_role = localStorage.getItem('role');
 	freeFields = [];
 	connectionError = null;
 	connectionList = [];
 	storeQRcode = '';
-	directAccessURL = 'http://app.fidelizapp.es:85/#/direct_access?id=';
+	directAccessURL = 'http://app.fidelizapp.serantes.pro/#/direct_access?id=';
 
 	selectedFiles: ImageSnippet[] = [];
 
@@ -92,10 +82,7 @@ export class StoreComponent implements OnInit {
 			const id = params.id;
 			this.storeService.getStoreById(id).subscribe((response: any) => {
 				this.store = response.store;
-				console.log(this.store._id);
 				this.storeQRcode = this.directAccessURL + id;
-				console.log(this.storeQRcode);
-				this.freeFields = this.store.free_fields;
 				this.background_imgURL = [ ...this.store.background_img ];
 				this.clientService.getClients(this.store._id).subscribe((response_clients: any) => {
 					this.clients = response_clients.clients;
@@ -143,22 +130,6 @@ export class StoreComponent implements OnInit {
 		if (!this.store.user) {
 			Swal.fire('Error', 'Debe seleccionar un usuario', 'error');
 			return;
-		}
-		if (!this.store.store_type) {
-			Swal.fire('Error', 'Debe seleccionar un tipo de tienda', 'error');
-			return;
-		}
-
-		if (this.freeFields) {
-			this.store.free_fields = this.freeFields.map((value: any) => {
-				if (value && value.active) {
-					return value;
-				}
-			});
-			this.store.selected_free_fields = JSON.stringify(this.store.free_fields);
-		} else {
-			this.store.free_fields = [];
-			this.store.selected_free_fields = '';
 		}
 
 		this.storeService
@@ -240,37 +211,6 @@ export class StoreComponent implements OnInit {
 
 		reader.readAsDataURL(file);
 		this.store.background_img[index] = null;
-	}
-
-	testConnection(type: string) {
-		const data = {
-			database_url: this.store.database_url,
-			database_password: this.store.database_password,
-			database_name: this.store.database_name,
-			database_port: this.store.database_port,
-			database_username: this.store.database_username
-		};
-		this.storeService.checkStoreConnection(data, type).subscribe(
-			(response: any) => {
-				if (response.ok) {
-					if (type === 'icg') {
-						this.freeFields = response.free_fields.free_fields;
-					}
-					Swal.fire('Exito', 'Conexión realizada', 'success').then(() => {
-						this.connectionError = false;
-					});
-				} else {
-					Swal.fire('Fallo', 'No es posible conectar con el servidor', 'error').then(() => {
-						this.connectionError = true;
-					});
-				}
-			},
-			(error: any) => {
-				Swal.fire('Fallo', `No es posible conectar con el servidor: ${error.error.err}`, 'error').then(() => {
-					this.connectionError = true;
-				});
-			}
-		);
 	}
 
 	getConnections(event) {

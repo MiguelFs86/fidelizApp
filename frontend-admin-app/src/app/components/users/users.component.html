@@ -114,10 +114,17 @@
                                         </mat-form-field>
                                     </td>
                                 </tr>
+																<tr>
+																	<td>
+																		<mat-form-field class="register-full-width">
+																			<textarea matInput rows="5" placeholder="Texto de protección de datos" [(ngModel)]="user.email_text" name="gpdr" style="padding: 20px; border-radius: 10px; border: 1px solid lightgray;"></textarea>
+																		</mat-form-field>
+																	</td>
+																</tr>
                             </table>
 						</form>
 						<br>
-                        <div *ngIf="auth.isAdmin()">
+                        <!-- <div *ngIf="auth.isAdmin()">
                             <h4 class="text-center">Sincronización con Gmail</h4>
                             <div class="register-full-width">
                                 <mat-checkbox name="googleSync" [(ngModel)]="gmailSyncFlag">¿Enlazar con cuenta de Gmail?</mat-checkbox>
@@ -141,7 +148,7 @@
 									{{ distributor.username }}
 								</option>
 							</select>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col-6">
                         <h4 class="text-center">Logo</h4>
@@ -208,14 +215,7 @@
                                         <button (click)="removeEmailImage(0)" class="btn btn-danger" *ngIf="user.email_img" style="margin-left: 20px; width: 40px; height: 150px;">X</button>
                                         <button (click)="removeEmailImage(0)" class="btn btn-danger" *ngIf="!user.email_img" style="margin-left: 20px; width: 40px; height: 150px;" disabled>X</button>
                                     </td>
-								</tr>
-								<tr>
-                                    <td>
-                                        <mat-form-field class="register-full-width">
-                                            <textarea matInput rows="5" placeholder="Texto de protección de datos" [(ngModel)]="user.email_text" name="gpdr" style="padding: 10px; border-radius: 10px; border: 1px solid lightgray;"></textarea>
-                                        </mat-form-field>
-                                    </td>
-                                </tr>
+																</tr>
                             </tbody>
                         </table>
                     </div>

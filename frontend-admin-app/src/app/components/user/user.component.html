@@ -84,31 +84,31 @@
                             </table>
                         </form>
                         <br>
-                        <div *ngIf="auth.isAdmin()">
+                        <!-- <div *ngIf="auth.isAdmin()">
                             <h4 class="text-center">Sincronización con Gmail</h4>
                             <div class="register-full-width">
                                 <mat-checkbox name="googleSync" [(ngModel)]="gmailSyncFlag">¿Enlazar con cuenta de Gmail?</mat-checkbox>
                             </div>
                             <button mat-raised-button color="primary" (click)="gmailSync(user._id)">Test/Start sync</button>
-						</div>
-						<br><br>
+												</div>
+												<br><br>
                         <div *ngIf="auth.isAdmin()">
                             <h4 class="text-center">Rol de usuario</h4>
                             <select style="width: 90%; height: 40px;" name="user" [(ngModel)]="user.role" required>
-								<option disabled hidden [ngValue]="0">{{ 'STORES_PAGE.CHOOSE_ONE' | translate }}</option>
-								<option style="height: 30px" *ngFor="let role of userRoles" [ngValue]="role">
-									{{ role == 'USER_ROLE' ? 'Usuario' : 'Distribuidor' }}
-								</option>
-							</select>
+															<option disabled hidden [ngValue]="0">{{ 'STORES_PAGE.CHOOSE_ONE' | translate }}</option>
+															<option style="height: 30px" *ngFor="let role of userRoles" [ngValue]="role">
+																{{ role == 'USER_ROLE' ? 'Usuario' : 'Distribuidor' }}
+															</option>
+														</select>
                             <br>
                             <h4 class="text-center">Distribuidor</h4>
                             <select style="width: 90%; height: 40px;" name="user" [(ngModel)]="user.distributor" required>
-								<option disabled hidden [ngValue]="0">{{ 'STORES_PAGE.CHOOSE_ONE' | translate }}</option>
-								<option style="height: 30px" *ngFor="let distributor of distributorList" [ngValue]="distributor._id">
-									{{ distributor.username }}
-								</option>
-							</select>
-                        </div>
+															<option disabled hidden [ngValue]="0">{{ 'STORES_PAGE.CHOOSE_ONE' | translate }}</option>
+															<option style="height: 30px" *ngFor="let distributor of distributorList" [ngValue]="distributor._id">
+																{{ distributor.username }}
+															</option>
+														</select>
+                        </div> -->
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-5">
