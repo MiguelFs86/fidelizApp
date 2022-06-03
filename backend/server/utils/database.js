@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const adminUser = require('./admin_user');
 
 mongoose.Promise = Promise;
 
@@ -34,6 +35,7 @@ createConnection = async () => {
 					pass: process.env.DB_PWD,
 					useNewUrlParser: true
 				});
+				adminUser.createAdminUser();
 			} catch (error) {
 				addToLog('error', error);
 			}

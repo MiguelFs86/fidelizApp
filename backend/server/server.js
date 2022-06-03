@@ -1,6 +1,5 @@
 require('./config/config');
 require('./utils/folder_tree');
-require('./utils/admin_user');
 
 const mongoose = require('./utils/database');
 const path = require('path');
@@ -43,9 +42,9 @@ app.use(session({ secret: 'session-secret', resave: false, saveUninitialized: tr
 
 /* Add headers */
 
-// app.use(cors({
-// 	origin: ['https://admin.fidelizapp.serantes.pro', 'https://fidelizapp.serantes.pro', 'https://web.fidelizapp.serantes.pro', 'https://www.fidelizapp.serantes.pro']
-// }));
+app.use(cors({
+	origin: ['https://admin.fidelizapp.serantes.pro', 'https://fidelizapp.serantes.pro', 'https://web.fidelizapp.serantes.pro', 'https://www.fidelizapp.serantes.pro']
+}));
 app.use((req, res, next) => {
 	const origin = req.get('origin');
 	console.log(origin);
