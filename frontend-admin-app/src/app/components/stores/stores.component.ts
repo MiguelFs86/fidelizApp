@@ -113,10 +113,6 @@ export class StoresComponent implements OnInit {
 			Swal.fire('Error', 'Debe seleccionar un usuario', 'error');
 			return;
 		}
-		if (!this.newStore.store_type) {
-			Swal.fire('Error', 'Debe seleccionar un tipo de tienda', 'error');
-			return;
-		}
 
 		this.storeService
 			.registerStore(this.newStore)
