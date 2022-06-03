@@ -30,6 +30,10 @@ services:
       - ME_CONFIG_MONGODB_SERVER=mongo
       - ME_CONFIG_BASICAUTH_USERNAME=fidelizapp
       - ME_CONFIG_BASICAUTH_PASSWORD=fidelizapp2022
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=fidelizApp1
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=fidelizApp2022
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
     networks:
       - web
       - database
