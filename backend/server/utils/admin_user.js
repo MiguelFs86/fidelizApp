@@ -30,4 +30,4 @@ createAdminUser = async () => {
 	}
 };
 
-module.exports = { createAdminUser: createAdminUser() };
+module.exports = { createAdminUser };
