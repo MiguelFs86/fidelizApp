@@ -10,6 +10,7 @@ import { AuthService } from '../../services/auth.service';
 import { SocketService } from '../../services/socket.service';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import * as moment from 'moment';
 registerLocaleData(localeEs, 'es');
 
 class ImageSnippet {
@@ -232,6 +233,42 @@ export class StoreComponent implements OnInit {
 			a.download = 'qrcode.jpg';
 			t = a.href;
 			a.click();
+		});
+	}
+
+	exportToExcel() {
+		const clientList = [];
+		moment.locale('es');
+		this.clients.forEach(c => {
+			clientList.push({
+				nombre: c.name,
+				email: c.email,
+				telefono: c.phone,
+				fechaAlta: moment(c.created_date).format('DD MMM YYYY HH:mm:ss')
+			})
+		})
+		console.log(this.clients);
+		console.log(clientList);
+		import("xlsx").then(xlsx => {
+				const worksheet = xlsx.utils.json_to_sheet(clientList);
+				const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+				const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+				this.saveAsExcelFile(excelBuffer, "clientes");
+		});
+	}
+
+	saveAsExcelFile(buffer: any, fileName: string): void {
+		import("file-saver").then(FileSaver => {
+			let EXCEL_TYPE =
+				"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+			let EXCEL_EXTENSION = ".xlsx";
+			const data: Blob = new Blob([buffer], {
+				type: EXCEL_TYPE
+			});
+			FileSaver.saveAs(
+				data,
+				fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+			);
 		});
 	}
 }

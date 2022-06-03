@@ -38,7 +38,7 @@
                                 <tr>
                                     <td>
                                         <mat-form-field class="register-full-width">
-                                            <textarea matInput rows="5" placeholder="Texto de protección de datos" [(ngModel)]="store.gpdr_text" name="gpdr" style="padding: 10px; border-radius: 10px; border: 1px solid lightgray;"></textarea>
+                                            <textarea matInput rows="5" placeholder="Texto de protección de datos *" [(ngModel)]="store.gpdr_text" name="gpdr" style="padding: 10px; border-radius: 10px; border: 1px solid lightgray;"></textarea>
                                         </mat-form-field>
                                     </td>
                                 </tr>
@@ -98,8 +98,9 @@
     </mat-tab>
     <mat-tab label="Lista de clientes" style="height: 100vh; padding:30px">
         <mat-card class="register-card text-center">
-            <mat-card-header>
+            <mat-card-header style="justify-content: space-around;">
                 <h4>Lista de clientes</h4>
+								<button class="export-excel-button" (click)="exportToExcel()">Descargar lista de clientes</button>
             </mat-card-header>
             <mat-card-content>
                 <div *ngIf="clients">

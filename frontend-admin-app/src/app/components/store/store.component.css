@@ -84,3 +84,12 @@
 	border: 2px solid lightgreen;
 	background: rgba(144, 238, 144, 0.100);
 }
+
+.export-excel-button {
+	background-color: #3f50b5;
+	color: white;
+	border-radius: 5px;
+	border: 1px solid white;
+	margin-bottom: 1rem;
+	padding: 5px 20px;
+}
