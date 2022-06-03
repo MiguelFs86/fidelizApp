@@ -43,7 +43,9 @@ app.use(session({ secret: 'session-secret', resave: false, saveUninitialized: tr
 
 /* Add headers */
 
-app.use(cors());
+app.use(cors({
+	origin: ['https://admin.fidelizapp.serantes.pro', 'https://fidelizapp.serantes.pro', 'https://web.fidelizapp.serantes.pro', 'https://www.fidelizapp.serantes.pro']
+}));
 // app.use((req, res, next) => {
 // 	const origin = req.get('origin');
 // 	console.log(origin);
