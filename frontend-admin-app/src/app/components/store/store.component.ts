@@ -267,7 +267,7 @@ export class StoreComponent implements OnInit {
 			});
 			FileSaver.saveAs(
 				data,
-				fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+				fileName + "lista_clientes_" + moment().format('DD-MM-YYYY HH:mm:ss') + EXCEL_EXTENSION
 			);
 		});
 	}
