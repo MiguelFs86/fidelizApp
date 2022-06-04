@@ -46,7 +46,7 @@ let sendMail = async(store, client, user) => {
     };
 
     transporter.use('compile', hbs(handlebarsOptions));
-    const templateName = emailConfig.emailAccount.split('@')[1].split('.')[0];
+    const templateName = emailConfig.emailAccount ? emailConfig.emailAccount.split('@')[1].split('.')[0] : 'default';
     const mailOptions = {
         from: ` ${emailConfig.emailAccount}`,
         to: `${client.email}`,

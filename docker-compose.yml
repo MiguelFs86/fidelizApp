@@ -13,7 +13,7 @@ services:
     ports:
       - "27017:27017"
     networks:
-      - database
+      - web
     container_name: mongo
   mongo-express:
     image: mongo-express
@@ -35,7 +35,6 @@ services:
       - ME_CONFIG_MONGODB_PORT=27017
     networks:
       - web
-      - database
     container_name: mongo-express
 
   backend:
@@ -55,7 +54,6 @@ services:
       - $PWD/logs/:/user/src/app/logs
     networks:
       - web
-      - database
     container_name: backend
 
   frontend-admin:
@@ -97,5 +95,3 @@ services:
 networks:
   web:
     external: true
-  database:
-    internal: true
