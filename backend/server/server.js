@@ -40,11 +40,19 @@ app.use(cookieParser());
 /* Add express sessions middleware */
 app.use(session({ secret: 'session-secret', resave: false, saveUninitialized: true, cookie: { secure: true } }));
 
-/* Add headers */
+/* parse application/x-www-form-urlencoded */
+app.use(
+	bodyParser.urlencoded({
+		extended: false
+	})
+);
+/* Parse raw requests */
+app.use(bodyParser.raw());
 
-app.use(cors({
-	origin: ['https://admin.fidelizapp.serantes.pro', 'https://fidelizapp.serantes.pro', 'https://web.fidelizapp.serantes.pro', 'https://www.fidelizapp.serantes.pro']
-}));
+/* parse application/json */
+app.use(bodyParser.json());
+
+/* Add headers */
 app.use((req, res, next) => {
 	const origin = req.get('origin');
 	console.log(origin);
@@ -65,18 +73,6 @@ app.use((req, res, next) => {
 
 /* Allow file uploading */
 app.use(fileUpload());
-
-/* parse application/x-www-form-urlencoded */
-app.use(
-	bodyParser.urlencoded({
-		extended: false
-	})
-);
-/* Parse raw requests */
-app.use(bodyParser.raw());
-
-/* parse application/json */
-app.use(bodyParser.json());
 
 /* Global route config */
 app.use(require('./routes/index'));
