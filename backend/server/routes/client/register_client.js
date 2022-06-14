@@ -35,20 +35,20 @@ saveClient = async(store, body, files, res) => {
             store: store
         });
         if (existingClient.length === 0) {
+            if (files) {
+                const response = await addSignature(client, res, files.signature);
+                if (!response.ok) {
+                    return res.status(400).json({
+                        ok: false,
+                        message: response.error,
+                        type: 16
+                    });
+                } else {
+                    client = response.clientDB;
+                }
+            }
             const savedClient = await client.save();
             if (savedClient) {
-                if (files) {
-                    const response = await addSignature(client, res, files.signature);
-                    if (!response.ok) {
-                        return res.status(400).json({
-                            ok: false,
-                            message: response.error,
-                            type: 16
-                        });
-                    } else {
-                        client = response.clientDB;
-                    }
-                }
                 const user = await User.findById(store.user);
                 addToLog('info', `Client "${client.name}" created by store "${store.name}"`);
                 if (user.emailConfig) {
