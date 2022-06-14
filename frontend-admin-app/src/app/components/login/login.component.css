@@ -14,3 +14,13 @@
 .mat-card-title {
     font-size: 16px;
 }
+
+.app-logo {
+	background: url('https://fidelizapp.serantes.pro/assets/img/fidelizApp_logo.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 400px;
+	height: 280px;
+	width: 100%;
+	margin-bottom: -130px;
+}
