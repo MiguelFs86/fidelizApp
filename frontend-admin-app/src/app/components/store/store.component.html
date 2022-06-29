@@ -1,4 +1,4 @@
-<mat-tab-group (selectedTabChange)="getConnections($event)">
+<mat-tab-group (selectedTabChange)="changeTab($event)">
     <mat-tab label="Detalle de tienda" style="height: 100vh; padding:30px">
         <mat-card class="register-card text-center">
             <mat-card-content>
@@ -146,12 +146,15 @@
         </mat-card>
 	</mat-tab>
 	<mat-tab *ngIf="auth.isAdmin()" label="Código QR para acceder a la tienda" style="height: 100vh; padding:30px">
-		{{ storeQRcode }}
+		URL de acceso a la tienda: 
+		<div class="alert alert-info">
+			{{ storeQRcode }}
+		</div>
 		<div class="col-3 text-center">
 			<div id="qrCodePreview" style="margin-bottom: 10px;">
 				<qr-code *ngIf="storeQRcode" [value]="storeQRcode" [size]="450"></qr-code>
 			</div>
-			<button *ngIf="storeQRcode" class="btn btn-success" (click)="downloadQRrcode()">Descargar código de barras</button>
+			<button *ngIf="storeQRcode" class="btn btn-success" (click)="downloadQRrcode()">Descargar código de QR</button>
 		</div>
 	</mat-tab>
 </mat-tab-group>

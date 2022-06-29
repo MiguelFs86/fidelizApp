@@ -214,7 +214,13 @@ export class StoreComponent implements OnInit {
 		this.store.background_img[index] = null;
 	}
 
-	getConnections(event) {
+	changeTab(event) {
+		if (event.index === 1) {
+			this.clients = [];
+			this.clientService.getClients(this.store._id).subscribe((response_clients: any) => {
+				this.clients = response_clients.clients;
+			});
+		}
 		if (event.index === 2) {
 			this.storeService.getStoreConnections(this.store._id).subscribe((connections: any) => {
 				if (connections.ok) {
