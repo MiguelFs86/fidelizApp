@@ -1,5 +1,7 @@
 const nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
+const path = require('path');
+const fs = require('fs');
 
 let sendMail = async(store, client, user) => {
     const config = {
@@ -46,7 +48,15 @@ let sendMail = async(store, client, user) => {
     };
 
     transporter.use('compile', hbs(handlebarsOptions));
-    const templateName = emailConfig.emailAccount ? emailConfig.emailAccount.split('@')[1].split('.')[0] : 'default';
+    // const templateName = emailConfig.emailAccount ? emailConfig.emailAccount.split('@')[1].split('.')[0] : 'default';
+    let templateName = ''
+    let imagePath = path.resolve(`utils/email_templates/${user.name}`);
+	if (fs.existsSync(imagePath)) {
+        templateName = user.name.toLowerCase();
+    } else {
+        templateName = 'default';
+    }
+    console.log(templateName);
     const mailOptions = {
         from: ` ${emailConfig.emailAccount}`,
         to: `${client.email}`,
