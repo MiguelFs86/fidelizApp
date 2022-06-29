@@ -56,7 +56,7 @@ export class StoreComponent implements OnInit {
 	connectionError = null;
 	connectionList = [];
 	storeQRcode = '';
-	directAccessURL = 'http://app.fidelizapp.serantes.pro/#/direct_access?id=';
+	directAccessURL = 'https://fidelizapp.serantes.pro/#/direct_access?id=';
 
 	selectedFiles: ImageSnippet[] = [];
 
@@ -247,8 +247,6 @@ export class StoreComponent implements OnInit {
 				fechaAlta: moment(c.created_date).format('DD MMM YYYY HH:mm:ss')
 			})
 		})
-		console.log(this.clients);
-		console.log(clientList);
 		import("xlsx").then(xlsx => {
 				const worksheet = xlsx.utils.json_to_sheet(clientList);
 				const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };

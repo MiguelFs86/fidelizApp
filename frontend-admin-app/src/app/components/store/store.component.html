@@ -55,7 +55,8 @@
 													<h4 class="text-center">{{ 'STORES_PAGE.LOGO' | translate }}</h4>
 													<button (click)="removeImage(0)" class="btn btn-danger" *ngIf="store.logo_img">X</button>
 													<div style="height: 150px; border: 1px solid lightgray">
-															<img *ngIf="store.logo_img" [src]="imagePath + store.logo_img" style="height: 150px">
+															<img *ngIf="store.logo_img && !logo_imgURL" [src]="imagePath + store.logo_img" style="height: 150px">
+															<img *ngIf="logo_imgURL" [src]="logo_imgURL" style="height: 150px">
 															<input *ngIf="!store.logo_img" (change)="selectLogoImage($event); preview(0, $event.target.files)" type="file" accept="image/*" id="logo_file" style="margin-top: 70px">
 													</div>
 													<br>
