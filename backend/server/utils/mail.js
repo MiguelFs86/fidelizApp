@@ -60,13 +60,13 @@ let sendMail = async(store, client, user) => {
     const mailOptions = {
         from: ` ${emailConfig.emailAccount}`,
         to: `${client.email}`,
-        subject: `Gracias por registrarse en ${store.name}`,
+        subject: `Gracias por registrarse en ${store ? store.name : '-'}`,
         text: `Hemos recibido su solicitud. Muchas gracias`,
         template: templateName,
         context: {
             config: config,
             client: client.name,
-            store: store.name,
+            store: store ? store.name : '-',
             name: user.name,
             store_email: user.email,
             email_img: user.email_img,
