@@ -12,6 +12,9 @@ router.post('/test/mail', [ checkUserToken, checkDistributorRole, checkAdminRole
 	const store = await Store.findOne({user: user})
 	const client = { email: body.email, name: 'Prueba email'};
 
+	console.log(user);
+	console.log(store);
+
 	const mail = await sendMail(store, client, user);
 	return res.status(200).json({
 		ok: mail
