@@ -92,8 +92,10 @@ export class StoresComponent implements OnInit {
 	searchStores(text?: string) {}
 
 	getStores() {
-		if (this.currentUser) {
-			this.storeService.getUserStores(this.currentUser).subscribe((response: any) => {
+		const userID = localStorage.getItem('userID');
+		if (!this.auth.isAdmin()) {
+			this.storeService.getUserStores(this.currentUser || userID).subscribe((response: any) => {
+				console.log(response);
 				this.storeList = response.stores;
 			});
 		} else {

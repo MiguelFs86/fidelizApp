@@ -44,14 +44,14 @@
                                 </tr>
                             </table>
                             <hr>
-                            <div *ngIf="auth.isAdmin()">
+                            <!-- <div *ngIf="auth.isAdmin()">
                                 <h4>Número de conexiones simultáneas</h4>
                                 <mat-form-field class="register-full-width">
                                     <input matInput [(ngModel)]="store.allowed_connections" type="number" name="allowed_connections" style="font-size: 40px;">
                                 </mat-form-field>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="col-6" *ngIf="auth.isAdmin()" [ngClass]="{'background-red': connectionError === true, 'background-green': connectionError === false}">
+                        <div class="col-6" [ngClass]="{'background-red': connectionError === true, 'background-green': connectionError === false}">
 													<h4 class="text-center">{{ 'STORES_PAGE.LOGO' | translate }}</h4>
 													<button (click)="removeImage(0)" class="btn btn-danger" *ngIf="store.logo_img">X</button>
 													<div style="height: 150px; border: 1px solid lightgray">
@@ -145,7 +145,7 @@
             </mat-card-content>
         </mat-card>
 	</mat-tab>
-	<mat-tab *ngIf="auth.isAdmin()" label="Código QR para acceder a la tienda" style="height: 100vh; padding:30px">
+	<mat-tab label="Código QR para acceder a la tienda" style="height: 100vh; padding:30px">
 		URL de acceso a la tienda: 
 		<div class="alert alert-info">
 			{{ storeQRcode }}

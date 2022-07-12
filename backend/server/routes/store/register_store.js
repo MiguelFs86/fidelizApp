@@ -26,7 +26,7 @@ router.post('/register/store', [ checkUserToken, checkAdminRole, checkDistributo
 				username: body.username,
 				user: body.user,
 				gpdr_text: body.gpdr_text,
-				allowed_connections: body.allowed_connections
+				allowed_connections: 50000000
 			});
 
 			if (req.files) {
