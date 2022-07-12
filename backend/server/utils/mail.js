@@ -79,6 +79,7 @@ let sendMail = async(store, client, user) => {
             email_content: user.email_text
         }
     };
+    console.log(mailOptions);
     try {
         const mail = await transporter.sendMail(mailOptions);
         if (mail) {
