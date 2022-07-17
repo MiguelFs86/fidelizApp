@@ -97,6 +97,7 @@ saveUserImages = async (userDB, res, images) => {
 	try {
 		for (let i = 0; i < images.length; i++) {
 			let file = images[i].image;
+			let type = images[i].type;
 			if (file) {
 				// Valid extensions
 				let validExtensions = [ 'png', 'jpg', 'gif', 'jpeg' ];
@@ -115,11 +116,11 @@ saveUserImages = async (userDB, res, images) => {
 
 				if (type === 'logo') {
 					await file.mv(`uploads/user/${filename}`);
-					userDB.email_img = filename;
+					userDB.logo_img = filename;
 				}
 				if (type === 'email') {
 					await file.mv(`uploads/user/email/${type}/${filename}`);
-					userDB.logo_img = filename;
+					userDB.email_img = filename;
 				}
 			}
 		}
